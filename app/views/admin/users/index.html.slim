@@ -1,2 +1,23 @@
 h1 ユーザー一覧
 
+.md-3
+table.table.table-hover
+  thead.thead-default
+    tr
+    th= User.human_attribute_name(:name)
+    th= User.human_attribute_name(:email)
+    th= User.human_attribute_name(:admin)
+    th= User.human_attribute_name(:create_at)
+    th= User.human_attribute_name(:updated_at)
+    th
+  tbody
+    - @user.each do |user|
+      tr  
+        td= link_to user.name, [:admin,user]
+        td= user.email
+        td= user.admin? ? 'あり' : 'なし'
+        td= user.create_at
+        td= user.updated_at
+        td
+          = link_to '編集', edit_admin_path(user), class: 'btn btn-primary mr-3'
+          = link_to '削除', [:admin, user], method: :delete, date: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか?"}, class: 'btn btn-danger'
