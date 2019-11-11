@@ -13,6 +13,7 @@ ja:
         id: ID
         name: タイトル 
         description: 投稿
+        image: 画像
         created_at: 投稿日時
         updated_at: 更新日時
       user:
@@ -23,7 +24,21 @@ ja:
         password_confirmation: パスワード（確認）
         created_at: 投稿日時
         updated_at: 更新日時
+    helpers:
+      slect:
+        prompt: 選択してください
+      submit:
+        create: 登録する
+        submit: 保存する
+        update: 更新する
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
       short: "%m/%d %H:%M"
+  views:
+    pagination:
+      first: '最初'
+      last: '最後'
+      previous: '前'
+      next: '次'
+      truncate: '...'   
