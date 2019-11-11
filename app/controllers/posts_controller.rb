@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
   def index
-    @posts = current_user.posts
+    @q = current_user.posts.ransack(params[:q])
+    @posts = Post.page(params[:page])
+    # @posts = current_user.posts.order(created_at: :desc)
   end
 
   def show
-    current_user.posts.find(params[:id])
+
   end
 
   def new
@@ -22,24 +26,25 @@ class PostsController < ApplicationController
   end
 
   def edit
-    current_user.posts.find(params[:id])
+    
   end
 
   def update
-    current_user.posts.find(params[:id])
-    post.update!(post_params)
+    @post.update!(post_params)
     redirect_to posts_url, notice: "投稿「#{post.name}」を更新しました。"
   end
 
   def destroy
-    current_user.posts.find(params[:id])
-    post.destroy
+    @post.destroy
     redirect_to posts_url, notice: "投稿「#{post.name}」を削除しました。"  
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:name, :description)
+    params.require(:post).permit(:name, :description, :image)
+  end
+  def set_post
+    @post = current_user.posts.find(params[:id])
   end
 end
