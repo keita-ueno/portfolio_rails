@@ -1,12 +1,14 @@
-h1 ログイン
-
-= form_with scope: :session, local: true do |f|
-  .form-group
-    = f.label :email, 'メールアドレス'
-    = f.text_field :email, class: 'form-control', id: 'session_email'
-  .form-group
-    = f.label :password, 'パスワード'
-    = f.password_field :password, class: 'form-control', id: 'session_password'
-  = f.submit 'ログインする', class: 'btn btn-primary'
-    
+.jumbotron.jumbotron-fluid.jumbotron-extend
+  h1 ファッションを楽しもう。
+  p funファッションはファッションに特化した記事投稿サイトです。 
+  p ファッションの情報を共有してファッションを知ろう。 
+  h1 ログイン
+  = form_with scope: :session, local: true do |f|
+    .form-group
+      = f.label :email, 'メールアドレス'
+      = f.text_field :email, class: 'form-control', id: 'session_email'
+    .form-group
+      = f.label :password, 'パスワード'
+      = f.password_field :password, class: 'form-control', id: 'session_password'
+    = f.submit 'ログインする', class: 'btn btn-primary'
 

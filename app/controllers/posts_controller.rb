@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :login_required
 
   def index
     @q = current_user.posts.ransack(params[:q])
-    @posts = Post.page(params[:page])
-    # @posts = current_user.posts.order(created_at: :desc)
+    @posts = @q.result(distinct: true).page(params[:page])
+    #@posts = current_user.posts.order(created_at: :desc)
   end
 
   def show
@@ -44,7 +45,12 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:name, :description, :image)
   end
+  
   def set_post
     @post = current_user.posts.find(params[:id])
+  end
+
+  def login_required
+    redirect_to login_path unless current_user
   end
 end
